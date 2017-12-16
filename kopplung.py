@@ -53,28 +53,28 @@ def diverg(alpha_mz, mass_Z):
 
 
 def sbeta(Nf):
-    return (11 - 2/3 * Nf)
+    return (11 - (2/3) * Nf)
 
 
 def ebeta(Nu):
     return (-16/3 * (1 + Nu/3))
 
 
-def muvfunc(Nu, Nf, alpha_mz, ealpha_mz):
-    muv = unp.exp(((ealpha_mz - alpha_mz)/(ealpha_mz*alpha_mz))*(2*np.pi/(ebeta(Nu) - sbeta(Nf))))
+def muvfunc(Nu, Nf, alpha_mz, ealpha_mz, mass_Z):
+    muv = unp.exp(((ealpha_mz - alpha_mz)/(ealpha_mz*alpha_mz))*(2*np.pi/(ebeta(Nu) - sbeta(Nf))))*mass_Z
     return muv
 
 
 if __name__ == '__main__':
     # z, b = np.genfromtxt('daten/magnetfeld.txt', unpack='True')
     mass_Z = ufloat(91.1876, 0.0021)
-    alpha_mz = ufloat(0.1181, 0.0011)
-    ealpha_mz = ufloat(127.940, 0.014)
-    ealpha_mz = ufloat(137, 0.014)
+    alpha_mz = ufloat(0.1182, 0.0016)
+    ealpha_mz = ufloat(127.950, 0.017)
+    # ealpha_mz = ufloat(137, 0.014)
     ealpha_mz = 1/ealpha_mz
-    Nf = np.array([5, 6])
-    Nu = np.array([2, 3])
+    Nf = np.array([5, 6, 10])
+    Nu = np.array([2, 3, 3])
     plotalpha(alpha_mz, mass_Z)
     print('Skala divergent bei mu=', diverg(alpha_mz, mass_Z), 'GeV')
-    print('muv =', muvfunc(Nu, Nf, alpha_mz, ealpha_mz))
+    print('muv =', muvfunc(Nu, Nf, alpha_mz, ealpha_mz, mass_Z), 'GeV')
     print(sbeta(Nf), ebeta(Nu))
