@@ -23,7 +23,7 @@ def plotalpha(alpha_mz, mass_Z):
     mu = np.logspace(-1, 30, 10000)
     alf = alpha(alpha_mz, mass_Z, mu)
     plt.fill_between(mu, noms(alf)+stds(alf), noms(alf) - stds(alf),
-                     color='red', label='Ein-Sigma-Intervall')
+                     color='red', label='1$\sigma$-Intervall')
 
     plt.plot(mu, noms(alf), label='Kurve')
 
